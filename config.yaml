@@ -1,0 +1,51 @@
+# Config for the job discovery agent.
+# Edit this file (not the code) to change what it looks for.
+
+# One MyCareersFuture search is run per term below, then results are merged and de-duplicated.
+search_terms:
+  - "data analyst"
+  - "business analyst"
+  - "data analytics"
+
+# How many pages of results to pull per search term (20 jobs/page by default).
+max_pages_per_term: 3
+
+# A job is kept only if its title OR description contains at least one of these
+# (case-insensitive, substring match).
+include_keywords:
+  - "data analyst"
+  - "business analyst"
+  - "analytics"
+  - "insights"
+
+# A job is dropped if its title contains any of these. Kept as a backstop
+# for jobs where MyCareersFuture doesn't provide a seniority tag at all
+# (see seniority_levels below, which is the more reliable filter).
+exclude_keywords:
+  - "senior"
+  - "lead"
+  - "director"
+  - "head of"
+  - "manager"
+  - "principal"
+  - "vp,"
+  - "vice president"
+
+# Filter by MyCareersFuture's OWN seniority classification for each posting
+# (far more reliable than guessing from the title). Leave empty to disable
+# and rely on include/exclude_keywords alone. Known values used by MCF's
+# own site filters: "Fresh/entry level", "Junior Executive", "Non-executive",
+# "Senior Executive", "Manager", "Middle Management", "Senior Management",
+# "Professional" — not guaranteed exhaustive, so after a run, check the
+# "position_levels" column in output/*.csv for what actually shows up and
+# adjust this list to match.
+seniority_levels:
+  - "Fresh/entry level"
+  - "Junior Executive"
+  - "Non-executive"
+
+# Optional: only keep jobs whose location/district contains one of these (case-insensitive).
+# Leave empty to keep all locations.
+locations: []
+
+output_dir: "output"
